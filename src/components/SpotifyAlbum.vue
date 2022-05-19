@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <SpotifyAlbumCard />
+  <div class="container_bg_card row row-cols-5">
+    <SpotifyAlbumCard v-for="item in album" :key="item" :album="item" />
   </div>
 </template>
 
@@ -28,4 +28,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+div.container_bg_card {
+  background-color: #1e2e3c;
+  height: 800px;
+}
+</style>
