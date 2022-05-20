@@ -1,10 +1,14 @@
 <template>
   <main>
     <div>
-      <SpotifySelectAlbum />
+      <SpotifySelectAlbum @insertSelected="optionSelected($event)" />
     </div>
     <div class="container_bg_card row row-cols-5">
-      <SpotifyAlbumCard v-for="item in album" :key="item" :album="item" />
+      <SpotifyAlbumCard
+        v-for="item in albumFiltered"
+        :key="item"
+        :album="item"
+      />
     </div>
   </main>
 </template>
@@ -23,6 +27,7 @@ export default {
   data: function () {
     return {
       album: [],
+      genre: "",
     };
   },
   created() {
@@ -31,6 +36,19 @@ export default {
       .then((resp) => {
         this.album = resp.data.response;
       });
+  },
+  computed: {
+    albumFiltered() {
+      const filteredArray = this.album.filter((element) => {
+        return element.genre.includes(this.genre);
+      });
+      return filteredArray;
+    },
+  },
+  methods: {
+    optionSelected(event) {
+      this.genre = event;
+    },
   },
 };
 </script>

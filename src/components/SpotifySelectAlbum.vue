@@ -2,8 +2,13 @@
   <div class="select_bg_container">
     <div class="select_container">
       <label for="filter-genre">
-        <select class="form-select" aria-label="Default select">
-          <option value="All" selected>Tutti i generi</option>
+        <select
+          class="form-select"
+          aria-label="Default select"
+          @change="$emit('insertSelected', selectedGenre)"
+          v-model="selectedGenre"
+        >
+          <option value="" selected>Tutti i generi</option>
           <option value="Pop">Pop</option>
           <option value="Rock">Rock</option>
           <option value="Metal">Jazz</option>
@@ -19,7 +24,7 @@ export default {
   name: "SpotifySelectAlbum",
   data: function () {
     return {
-      selectedGenre: "All",
+      selectedGenre: "",
     };
   },
 };
